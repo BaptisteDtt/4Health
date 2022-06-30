@@ -8,7 +8,7 @@ export default function Medecin() {
     <View style={styles.container}>
       <Text> Code Baptiste </Text>
       <Pressable
-              onPress={() => navigation.navigate('EspacePatient')}
+              onPress={() => navigation.navigate('EspaceMedecin')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>

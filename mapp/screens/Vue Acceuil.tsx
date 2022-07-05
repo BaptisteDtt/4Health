@@ -91,8 +91,7 @@ const styles = StyleSheet.create({
           width : '50%',
           flexDirection : 'column',
       }
-  }),
-   
+  }), 
   },
   title: {
     fontSize: 40,
@@ -107,23 +106,23 @@ const styles = StyleSheet.create({
     darkColor : "rgba(175, 216, 242, 0.5)" 
   },
   logo:{
-    width : 100,
-    height : 50,
+    width : 150,
+    height : 80,
   },
   img:{
     display : 'flex',
     ...Platform.select({
       ios: {
         marginLeft : '-10%',
-        marginTop : '25%',
-        width : '160%',
-        height : 370,
+        marginTop : '28%',
+        width : '150%',
+        height : 360,
       },
       android: {
         marginLeft : '-10%',
-        marginTop : '25%',
-        width : '160%',
-        height : 370,
+        marginTop : '28%',
+        width : '150%',
+        height : 360,
       },
       default: {
           // other platforms, web for example

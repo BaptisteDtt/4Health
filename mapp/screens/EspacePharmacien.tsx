@@ -1,71 +1,144 @@
-import { StyleSheet, Pressable, Modal } from 'react-native';
+import { StyleSheet, Pressable, Platform, Image} from 'react-native';
 import { Text, View} from '../components/Themed';
 import { useNavigation } from '@react-navigation/native';
-import InformationsPatient from '../components/InformationsPatient';
-import { Drawer } from 'react-native-paper';
 import * as React from 'react';
-import Pharmacien from './Pharmacien';
 
-export default function EspacePatient(){
+// component des Informations du Patient
+function InformationsPharmacien() {
+  return (
+    <View style={styles.pageview}>
+      <View>
+        <Text>
+          Informations du pharmacien
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+
+// component des Ordonnances du Pharmacien
+function OrdonnancesPharmacien() {
+  return (
+    <View style={styles.pageview}>
+      <View>
+        <Text>
+          Ordonnances du pharmacien
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+
+export default function EspacePharmacien(){
   const navigation = useNavigation();
-  const [active, setActive] = React.useState(1);
-  const SetView = (active) => {
-    setActive(active);
-  };
+  const[active, setActive] = React.useState(1);
+
+  const SetView = (open) =>{
+    setActive(open);
+  }
 
   const ActiveView = () => {
     switch (active) {
       case 1:
-        return <InformationsPatient/>;
+        return <InformationsPharmacien/>;
       case 2:
-        return <Pharmacien/>;
+        return <OrdonnancesPharmacien/>;
     }
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}> Bienvenue cher Professionnel de santé </Text>
-      <Drawer.Section title="MENU" style={styles.drawer}>
-      <Drawer.Item
-        label="Mes Patients"
-        onPress={() => SetView(1)}
-        icon="contacts"
-        
-      />
-      <Drawer.Item
-        label="Mes Ordonnances"
-        onPress={() => SetView(2)}
-        icon="file"
-      />
-      <Drawer.Item
-        label="Deconnexion"
-        onPress={() =>  navigation.navigate('VueAcceuil')}
-        icon="logout"
-      />
-    </Drawer.Section>
-
-    {ActiveView()}
+  return(
+    <View style={{backgroundColor : '#fff'}}>
+      <Image source={require('../assets/images/logo.png')} style={styles.logo}/>
+      <View style={styles.separator} lightColor="#AFD8F2" darkColor="rgba(175, 216, 242, 0.5)" />
+      <View style={styles.menuo}>
+          <Image source={require('../assets/images/menu.png')} style={styles.iconmenu}/>
+          <Text style={styles.menutext}>Menu</Text>
+        <Pressable onPress={() => SetView(1)} style={styles.bouton}>
+          <Image source={require('../assets/images/profil.png')} style={styles.icon}/>
+          <Text> Mes Informations</Text>
+        </Pressable>
+        <Pressable onPress={() => SetView(2)} style={styles.bouton}>
+          <Image source={require('../assets/images/ordo.png')} style={styles.icon}/>
+          <Text> Mes Ordonnances</Text>
+        </Pressable>
+        <Pressable  onPress={() =>  navigation.navigate('VueAcceuil')} style={styles.bouton}>
+          <Image source={require('../assets/images/exit.png')} style={styles.icon}/>
+          <Text> Deconnexion </Text>
+        </Pressable>
     </View>
-  );
+        {ActiveView()}
+  </View>
+  )
   }
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  menutext :{
+    position : 'absolute',
+    top : 30,
+    left : 110
   },
-  drawer:{
-    position :'absolute',
-    top : 100,
-    left : 40,
+  logo:{
+    width : 150,
+    height : 80,
+    marginLeft : 550,
+    marginTop : 10,
+  },
+  separator: {
+    height: 3,
+    width: 400,
+    lightColor : "#AFD8F2",
+    darkColor : "rgba(175, 216, 242, 0.5)" 
+  },
+  menuo :{
+    position : 'absolute',
+    top : 140,
+    left : 50,
+    width : '20%',
+    height : 350,
+    margin : 20,
+    borderColor : "#AFD8F2",
+    borderRadius : 20,
+    borderStyle : 'solid',
+    borderWidth : 20
+  },
+  pageview : {
+    position : 'absolute',
+    top : 160,
+    left : 400,
+    width : '60%',
+    height : 350,
+    borderRadius : 20,
+    padding : 30
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    position : 'absolute',
+    top : 60,
+    left : 500,
   },
   separator: {
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  icon : {
+    height : 30,
+    width : 30
+  },
+  iconmenu:{
+    height : 40,
+    width : 40,
+    backgroundColor : "#AFD8F2",
+    borderRadius : 20,
+    margin : 20,
+    marginLeft : 50
+  },
+  bouton : {
+    backgroundColor : 'D3D3D3',
+    margin : 20,
+    flexDirection : 'row'
   },
 });

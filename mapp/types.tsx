@@ -21,7 +21,6 @@ export type RootStackParamList = {
   EspacePharmacien : undefined;
   EspaceMedecin : undefined;
   VueAcceuil : undefined;
-  InformationPatient :undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -37,7 +36,6 @@ export type RootTabParamList = {
   EspacePatient : undefined;
   EspacePharmacien : undefined;
   EspaceMedecin : undefined;
-  InformationPatient : undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

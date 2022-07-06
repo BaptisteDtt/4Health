@@ -1,7 +1,5 @@
 import { Platform, StyleSheet, Image} from 'react-native';
-
 import { Text, View } from '../components/Themed';
-
 
 export default function ModalScreen () {
   return (
@@ -11,22 +9,22 @@ export default function ModalScreen () {
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <View style={styles.presentation}>
         <View style={styles.membres}>
-          <Image source={require('../assets/images/Baptiste.jfif')} style={styles.img}/>
+          <Image source={require('../assets/images/Baptiste.jpg')} style={styles.img}/>
           <Text style={{color:'#fff'}}> Baptiste Dattée</Text>
           <Text style={{color :'#D3D3D3'}}> Lead Developper</Text>
         </View>
         <View style={styles.membres}>
-          <Image source={require('../assets/images/Baptiste.jfif')} style={styles.img}/>
+          <Image source={require('../assets/images/MP.jpg')} style={styles.img}/>
           <Text style={{color:'#fff'}}> Marin-Pierre Babin</Text>
           <Text style={{color:'#D3D3D3'}}> Database Manager</Text>
         </View>
         <View style={styles.membres}>
-        <Image source={require('../assets/images/Baptiste.jfif')} style={styles.img}/>
+        <Image source={require('../assets/images/Eléna.jpg')} style={styles.img}/>
           <Text style={{color:'#fff'}}> Eléna Téléga </Text>
           <Text style={{color:'#D3D3D3'}}> Product Manager</Text>
         </View>
         <View style={styles.membres}>
-        <Image source={require('../assets/images/Baptiste.jfif')} style={styles.img}/>
+        <Image source={require('../assets/images/Diego.jpg')} style={styles.img}/>
           <Text style={{color:'#fff'}}> Diego Saingier</Text>
           <Text style={{color:'#D3D3D3'}}> Service client</Text>
         </View>
@@ -38,12 +36,30 @@ export default function ModalScreen () {
 
 const styles = StyleSheet.create({
   membres : {
-    flexDirection : 'column',
-    backgroundColor : '#1F3541',
-    alignItems : 'center',
+    ...Platform.select({
+      android : {
+        flexDirection : 'row',
+        backgroundColor : '#1F3541',
+        alignItems : 'center',
+      },
+      default : {
+        flexDirection : 'column',
+        backgroundColor : '#1F3541',
+        alignItems : 'center',
+      }
+    })
+    
   },
   presentation : {
-    flexDirection : 'row',
+    ...Platform.select({
+      android : {
+        flexDirection : 'column',
+      },
+      default : {
+        flexDirection : 'row',
+      }
+    })
+    
   },
   logo : {
     width : 200,
@@ -52,10 +68,21 @@ const styles = StyleSheet.create({
     borderRadius : 20
   },
   img : {
-    width: 200,
-    height: 200,
-    borderRadius : 500,
-    margin : 20,
+    ...Platform.select({
+      android : {
+        width : 100,
+        height : 100,
+        borderRadius : 500,
+        margin : 10,
+      },
+      default : {
+      width: 200,
+      height: 200,
+      borderRadius : 500,
+      margin : 20,
+      }
+    }),
+    
   },
   container: {
     flex: 1,

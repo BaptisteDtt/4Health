@@ -53,19 +53,21 @@ export default function EspacePatient(){
       <Image source={require('../assets/images/logo.png')} style={styles.logo}/>
       <View style={styles.separator} lightColor="#AFD8F2" darkColor="rgba(175, 216, 242, 0.5)" />
       <View style={styles.menuo}>
+        <View style={{flexDirection : 'column', margin :5}}>
           <Image source={require('../assets/images/menu.png')} style={styles.iconmenu}/>
-          <Text style={styles.menutext}>Menu</Text>
+          <Text>Menu</Text>
+        </View>
         <Pressable onPress={() => SetView(1)} style={styles.bouton}>
           <Image source={require('../assets/images/profil.png')} style={styles.icon}/>
-          <Text> Mes Informations</Text>
+          <Text style={styles.menutext}> Mes Informations</Text>
         </Pressable>
         <Pressable onPress={() => SetView(2)} style={styles.bouton}>
           <Image source={require('../assets/images/ordo.png')} style={styles.icon}/>
-          <Text> Mes Ordonnances</Text>
+          <Text style={styles.menutext}> Mes Ordonnances</Text>
         </Pressable>
         <Pressable  onPress={() =>  navigation.navigate('VueAcceuil')} style={styles.bouton}>
           <Image source={require('../assets/images/exit.png')} style={styles.icon}/>
-          <Text> Deconnexion </Text>
+          <Text style={styles.menutext}> Deconnexion </Text>
         </Pressable>
     </View>
         {ActiveView()}
@@ -75,42 +77,94 @@ export default function EspacePatient(){
 
 const styles = StyleSheet.create({
   menutext :{
-    position : 'absolute',
-    top : 30,
-    left : 110
+    ...Platform.select({
+      default : {
+        position : 'absolute',
+        top : 30,
+        left : 110
+      },
+      android :{
+        width : 90,
+      }
+    })
+    
   },
   logo:{
-    width : 150,
-    height : 80,
-    marginLeft : 550,
-    marginTop : 10,
+    ...Platform.select({
+        default : {
+          width : 150,
+          height : 80,
+          marginLeft : 550,
+          marginTop : 10,
+        },
+        android :{
+          width : 100,
+          height : 50,
+          marginTop : 100,
+          marginLeft : 150,
+          marginBottom : 25
+        }
+    })
+    
   },
   separator: {
     height: 3,
-    width: 400,
+    width: '100%',
     lightColor : "#AFD8F2",
     darkColor : "rgba(175, 216, 242, 0.5)" 
   },
   menuo :{
-    position : 'absolute',
-    top : 140,
-    left : 50,
-    width : '20%',
-    height : 350,
-    margin : 20,
-    borderColor : "#AFD8F2",
-    borderRadius : 20,
-    borderStyle : 'solid',
-    borderWidth : 20
+    ...Platform.select({
+      default: {
+        position : 'absolute',
+        top : 140,
+        left : 50,
+        width : '20%',
+        height : 350,
+        margin : 20,
+        borderColor : "#AFD8F2",
+        borderRadius : 20,
+        borderStyle : 'solid',
+        borderWidth : 20
+      },
+      android: {
+        position : 'absolute',
+        top : 190,
+        left : 20,
+        width : '90%',
+        height : 100,
+        borderColor : "#AFD8F2",
+        borderRadius : 20,
+        borderStyle : 'solid',
+        borderWidth : 10,
+        flexDirection : 'row',
+        padding : 5
+      }
+    })
+    
   },
   pageview : {
-    position : 'absolute',
-    top : 160,
-    left : 400,
-    width : '60%',
-    height : 350,
-    borderRadius : 20,
-    padding : 30
+    ...Platform.select({
+      default : {
+        position : 'absolute',
+        top : 160,
+        left : 400,
+        width : '60%',
+        height : 350,
+        borderRadius : 20,
+        padding : 30
+      },
+      android : {
+        position : 'absolute',
+        top : 350,
+        left : 20,
+        width : '90%',
+        height : 450,
+        borderRadius : 20,
+        padding : 30
+      }
+    })
+    
   },
   title: {
     fontSize: 20,
@@ -119,26 +173,35 @@ const styles = StyleSheet.create({
     top : 60,
     left : 500,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
   icon : {
     height : 30,
     width : 30
   },
   iconmenu:{
+    ...Platform.select({
+        default : {
+          margin : 20,
+          marginLeft : 50},
+        android :{
+        }
+    }),
     height : 40,
     width : 40,
     backgroundColor : "#AFD8F2",
     borderRadius : 20,
-    margin : 20,
-    marginLeft : 50
+    
   },
   bouton : {
+    ...Platform.select({
+      android : {
+        flexDirection :'column',
+        alignItems : 'center',
+      },
+      default : {
+        flexDirection : 'row',
+      }
+    }),
     backgroundColor : 'D3D3D3',
-    margin : 20,
-    flexDirection : 'row'
+
   },
 });
